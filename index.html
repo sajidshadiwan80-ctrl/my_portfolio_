@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atik Portfolio</title>
+
+    <style>
+        /* ---------- GLOBAL BACKGROUND + SNOWFALL ---------- */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            scroll-behavior: smooth;
+
+            background: linear-gradient(135deg, #090014, #250036, #440067, #002b55, #006d7a);
+            background-size: 500% 500%;
+            animation: bgMove 10s ease-in-out infinite;
+
+            color: white;
+            overflow-x: hidden;
+        }
+
+        @keyframes bgMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* SNOWFALL EFFECT */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 12px;
+            user-select: none;
+            pointer-events: none;
+            animation: snow linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes snow {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.30);
+            backdrop-filter: blur(8px);
+            border-right: 2px solid rgba(0, 255, 242, 0.6);
+            padding-top: 40px;
+            z-index: 5;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(90deg, #00eaff, #ff00c8, #7b5bff);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: flames 2.2s infinite;
+        }
+
+        @keyframes flames {
+            0% {
+                text-shadow: 0 0 15px #00eeff, 0 0 35px #ff00c8;
+            }
+
+            50% {
+                text-shadow: 0 0 35px #00ffee, 0 0 60px #d800ff;
+            }
+
+            100% {
+                text-shadow: 0 0 15px #00eeff, 0 0 35px #ff00c8;
+            }
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-top: 40px;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .sidebar ul li {
+            margin: 25px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            transition: .3s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #00eaff;
+            letter-spacing: 2px;
+        }
+
+        /* ---------- MAIN CONTENT ---------- */
+        .content {
+            margin-left: 220px;
+            padding: 50px;
+            flex: 1;
+            z-index: 5;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .profile-img {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00eaff;
+            box-shadow: 0 0 25px #00eaff, 0 0 60px #00bbff, 0 0 95px #0055ff;
+            animation: imgGlow 2.5s infinite alternate;
+        }
+
+        @keyframes imgGlow {
+            from {
+                box-shadow: 0 0 30px #00ffea, 0 0 60px #0077ff;
+            }
+
+            to {
+                box-shadow: 0 0 60px #00fff6, 0 0 110px #0044ff;
+            }
+        }
+
+        h1 {
+            font-size: 45px;
+            margin: 10px 0;
+            font-weight: 700;
+            text-shadow: 0 0 10px cyan, 0 0 25px #00c4ff;
+        }
+
+        /* SCROLL TEXT */
+        .scroll-text-container {
+            width: 100%;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .scroll-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: #00d9ff;
+            white-space: nowrap;
+            animation: scrollText 12s linear infinite;
+            text-shadow: 0 0 15px #00eaff;
+        }
+
+        @keyframes scrollText {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* ABOUT + SKILLS */
+        .about-skill-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .about-box,
+        .skills-box {
+            width: 45%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid cyan;
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+        }
+
+        .skills-box .skill {
+            margin: 15px 0;
+        }
+
+        .skill-name {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: cyan;
+            box-shadow: 0 0 10px cyan;
+        }
+
+        /* CONTACT CENTERED */
+        .contact-box {
+            width: 350px;
+            padding: 30px;
+            margin: 60px auto;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid cyan;
+            backdrop-filter: blur(6px);
+            text-align: center;
+        }
+
+        .contact-box input,
+        .contact-box textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 2px solid cyan;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: cyan;
+            color: black;
+            border: none;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        /* SOCIAL BAR */
+        .social-bar {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .social-bar a {
+            margin: 0 12px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: cyan;
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 0 15px cyan;
+        }
+
+        .end-line {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SNOWFALL LAYER -->
+    <script>
+        for (let i = 0; i < 70; i++) {
+            let snow = document.createElement("div");
+            snow.className = "snowflake";
+            snow.innerHTML = "❄";
+
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.animationDuration = (3 + Math.random() * 5) + "s";
+            snow.style.opacity = Math.random();
+            snow.style.fontSize = (10 + Math.random() * 18) + "px";
+
+            document.body.appendChild(snow);
+        }
+    </script>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo">ATIK DIWAN</div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <!-- HERO -->
+        <section id="home" class="hero">
+            <img src="./image/atik.jpeg" class="profile-img">
+
+            <h1>Hello, I'm Atik</h1>
+
+            <div class="scroll-text-container">
+                <div class="scroll-text">🔥 Software Developer | Creative Builder | Web Enthusiast 🔥</div>
+            </div>
+        </section>
+
+        <!-- ABOUT + SKILLS -->
+        <div id="about" class="about-skill-row">
+
+            <div class="about-box">
+                <h2>About Me</h2>
+                <p>
+                <h3>>'m Atik — a passionate and dedicated software developer who loves turning ideas
+                    into clean, modern, and meaningful digital experiences.
+
+                    I enjoy learning new
+                    technologies, solving real problems, and continuously improving myself as a
+                    developer and as a creator.</h3>
+                </p>
+            </div>
+
+            <div class="skills-box">
+                <h2 style="text-shadow:0 0 10px cyan;">My Skills</h2>
+
+                <div class="skill">
+                    <div class="skill-name">Software Development</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">HTML</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">CSS</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">JavaScript</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">Java</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-name">DSA</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 65%;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTACT (CENTERED) -->
+        <section id="contact" class="contact-box">
+            <h2>Contact Me</h2>
+
+            <input type="text" placeholder="Enter Your Name">
+            <input type="email" placeholder="Enter Your Email">
+            <textarea rows="3" placeholder="Your Message..."></textarea>
+
+            <button class="submit-btn">Send Message</button>
+        </section>
+
+        <!-- SOCIAL -->
+        <div class="social-bar">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="22"> Instagram</a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="22"> Email</a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" width="22"> GitHub</a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="22"> LinkedIn</a>
+        </div>
+
+        <div class="end-line">“Creating digital experiences with passion.”</div>
+
+    </div>
+
+</body>
+
+</html>
